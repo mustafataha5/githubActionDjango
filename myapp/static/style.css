@@ -19,3 +19,12 @@ h2{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
 }
+
+h3{
+    width: fit-content;
+    padding: 4px 10px;
+    background-color: #555;
+    color: orange;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
