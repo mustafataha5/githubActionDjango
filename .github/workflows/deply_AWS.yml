@@ -1,11 +1,11 @@
 name: Deploy to AWS EC2
 
 on:
-  # push:
-  #   branches:
-  #     - main  # Deploy on push to the main branch
-  on:
-  workflow_dispatch:  # Allows manual triggering
+  push:
+    branches:
+      - master  # Deploy on push to the main branch
+  # on:
+  # workflow_dispatch:  # Allows manual triggering
 
 jobs:
   deploy:
