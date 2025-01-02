@@ -1,11 +1,11 @@
 name: Deploy to AWS EC2
 
 on:
-  push:
-    branches:
-      - master  # Deploy on push to the main branch
-  # on:
-  # workflow_dispatch:  # Allows manual triggering
+  workflow_run:
+    workflows: ["Django CI"]  # Name of the CI workflow
+    types:
+      - completed
+    status: success  # Only trigger if the CI workflow is successful
 
 jobs:
   deploy:
