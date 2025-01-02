@@ -10,3 +10,12 @@ h1{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
 }
+
+h2{
+    width: fit-content;
+    padding: 4px 10px;
+    background-color: brown;
+    color: yellow;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
