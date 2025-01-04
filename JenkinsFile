@@ -1,44 +1,49 @@
 pipeline {
-    agent { 
-        node { 
-            label 'docker_agent_python_with_docker' 
-        } 
-    }
+    agent any
+
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub credentials
-        IMAGE_NAME = 'mustafataha5/my-django:jenkins' // Image tag
+        DOCKER_HUB_USERNAME = 'mustafataha5'
+        DOCKER_HUB_PASSWORD = credentials('docker-hub-password') // You need to configure Docker Hub credentials in Jenkins
+        IMAGE_NAME = 'my-django'
+        IMAGE_TAG = 'jenkins'
     }
+
     stages {
         stage('Clone Repository') {
             steps {
-                echo 'Cloning repository...'
-                git branch: 'master', url: 'https://github.com/mustafataha5/githubActionDjango.git'
+                git 'https://github.com/mustafataha5/githubActionDjango.git'
             }
         }
+
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker image...'
-                sh "docker build -t ${IMAGE_NAME} ."
+                script {
+                    // Build the Docker image
+                    docker.build("${DOCKER_HUB_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}")
+                }
             }
         }
-        stage('Push to Docker Hub') {
+
+        stage('Login to Docker Hub') {
             steps {
-                echo 'Pushing Docker image to Docker Hub...'
                 script {
-                    sh """
-                    echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin
-                    docker push ${IMAGE_NAME}
-                    """
+                    // Login to Docker Hub using the credentials
+                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_HUB_USERNAME}/${DOCKER_HUB_PASSWORD}") {
+                        // Push the image to Docker Hub
+                        docker.image("${DOCKER_HUB_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}").push()
+                    }
                 }
             }
         }
     }
+
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo "Docker image pushed successfully to Docker Hub."
         }
+
         failure {
-            echo 'Pipeline failed.'
+            echo "Build or Push failed."
         }
     }
 }
