@@ -12,7 +12,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning repository...'
-                git branch: 'main', url: 'https://github.com/mustafataha5/githubActionDjango.git'
+                git branch: 'master', url: 'https://github.com/mustafataha5/githubActionDjango.git'
             }
         }
         stage('Build Docker Image') {
