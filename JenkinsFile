@@ -1,7 +1,7 @@
 pipeline {
     agent { 
         node { 
-            label 'docker_agent_python' 
+            label 'docker_agent_python_with_docker' 
         } 
     }
     environment {
