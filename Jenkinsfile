@@ -7,8 +7,8 @@ pipeline {
     }
 
     environment {
-        DOCKER_HUB_USERNAME = 'mustafataha5'
-        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub credentials
+       // DOCKER_HUB_USERNAME = 'mustafataha5'
+        DOCKERHUB_CREDENTIALS = credentials('DockerUser') // Docker Hub credentials
         IMAGE_NAME = 'my-django'
         IMAGE_TAG = 'jenkins'
     }
