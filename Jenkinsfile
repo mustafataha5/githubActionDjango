@@ -1,10 +1,10 @@
 pipeline {
-    //agent any
-    agent{
-        node{
-            label: "docker_agent_python_with_docker"
-        }
-    }
+    agent any
+    // agent{
+    //     node{
+    //         label: "docker_agent_python_with_docker"
+    //     }
+    // }
 
     environment {
        // DOCKER_HUB_USERNAME = 'mustafataha5'
